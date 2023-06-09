@@ -1,0 +1,69 @@
+﻿@model IEnumerable<CorePlus.ViewModels.ReportViewModel>
+@{
+    ViewBag.Title = "Appointment History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table id="myTable" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th colspan="6"><p style="color:forestgreen; font-weight:800;"> @ViewBag.PractitionerName </p></th>
+        </tr>
+        <tr>
+            <th>Date</th>
+            <th>Client Name</th>
+            <th>Appointment Type</th>
+            <th>Duration</th>
+            <th>Revenue</th>
+            <th>Cost</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.Raw(item.appointments.date.ToString("MM/dd/yyyy"))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.appointments.client_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.appointments.appointment_type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.appointments.duration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.appointments.cost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.appointments.revenue)
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'print',
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ]
+            });
+        });
+    </script>
+}
+

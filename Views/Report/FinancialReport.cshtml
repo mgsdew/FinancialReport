@@ -1,0 +1,62 @@
+﻿@model List<CorePlus.ViewModels.ReportViewModel>
+@{
+    ViewBag.Title = "Financial Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<div class="container">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="dateFrom" class="visually-hidden">Date From</label>
+            <input type="text" class="form-control" id="dateFrom">
+        </div>
+        <div class="form-group">
+            <label for="dateTo" class="visually-hidden">Date To</label>
+            <input type="text" class="form-control" id="dateTo">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="practitioners" class="visually-hidden">Practitioners</label>
+            @Html.DropDownList("Practitioner", (IEnumerable<SelectListItem>)ViewData["Practitioners"], "-- Select a Practitioner--", new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <button type="submit" onclick="filterReport()" class="btn btn-primary mb-3">Filter</button>
+        </div>
+    </div>
+</div>
+
+ <br />
+
+    <table id="tblReport" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>Practitioner</th>
+                <th>Year</th>
+                <th>Month</th>
+                <th>Cost</th>
+                <th>Revenue</th>
+
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Practitioner</th>
+                <th>Year</th>
+                <th>Month</th>
+                <th>Cost</th>
+                <th>Revenue</th>
+            </tr>
+        </tfoot>
+    </table>
+
+
+
+    @section Scripts{
+
+        <script src="~/Scripts/Custom/financialReport.js"></script>
+    }
+
+
